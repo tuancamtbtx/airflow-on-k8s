@@ -18,4 +18,12 @@ Ngày 2022/23/11 trên server A xuất hiện sftp_A://a/b/c/file_2.txt thì chu
 Ngày 2022/24/11 trên server A xuất hiện sftp_A://a/b/c/file_3.txt thì chuyển sang server B sftp_B://a/b/c/file_3.txt “
 
 
-## Architect
+## Flow Design
+
+![Flow design](./images/flow.png)
+
+## Setup 
+
+## How To Run
+
+
