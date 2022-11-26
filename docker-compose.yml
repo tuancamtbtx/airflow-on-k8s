@@ -1,37 +1,49 @@
-version: '2.1'
+version: '3.7'
 services:
-    redis:
-        image: 'redis:5.0.5'
-        # command: redis-server --requirepass redispass
+    sftp_a:
+        image: atmoz/sftp
+        ports:
+            - "9922:22"
+        command: foo:pass:1001:12345:/foo-home
+        networks:
+          - turreta_network
+    sftp_b:
+        image: atmoz/sftp
+        ports:
+            - "9923:22"
+        command: foo:pass:1001:12345:/foo-home
+        networks:
+          - turreta_network
+
     postgres:
         image: postgres:9.6
         environment:
             - POSTGRES_USER=airflow
             - POSTGRES_PASSWORD=airflow
             - POSTGRES_DB=airflow
-        # Uncomment these lines to persist data on the local filesystem.
-        #     - PGDATA=/var/lib/postgresql/data/pgdata
-        # volumes:
-        #     - ./pgdata:/var/lib/postgresql/data/pgdata
-
+        logging:
+            options:
+                max-size: 10m
+                max-file: "3"
     webserver:
-        image: puckel/docker-airflow:1.10.9
+        # build: .
+        image: vantuan12345/docker-airflow:2.3.2.1
         restart: always
         depends_on:
             - postgres
-            - redis
         environment:
+            - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+            - POSTGRES_USER=airflow
+            - POSTGRES_PASSWORD=airflow
+            - POSTGRES_DB=airflow
             - LOAD_EX=n
-            - FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
-            - EXECUTOR=Celery
-            # - POSTGRES_USER=airflow
-            # - POSTGRES_PASSWORD=airflow
-            # - POSTGRES_DB=airflow
-            # - REDIS_PASSWORD=redispass
+            - EXECUTOR=Local
+        logging:
+            options:
+                max-size: 10m
+                max-file: "3"
         volumes:
             - ./dags:/usr/local/airflow/dags
-            # Uncomment to include custom plugins
-            # - ./plugins:/usr/local/airflow/plugins
         ports:
             - "8080:8080"
         command: webserver
@@ -41,52 +53,20 @@ services:
             timeout: 30s
             retries: 3
 
-    flower:
-        image: puckel/docker-airflow:1.10.9
-        restart: always
-        depends_on:
-            - redis
-        environment:
-            - EXECUTOR=Celery
-            # - REDIS_PASSWORD=redispass
-        ports:
-            - "5555:5555"
-        command: flower
-
     scheduler:
-        image: puckel/docker-airflow:1.10.9
+        # build: .
+        image: vantuan12345/docker-airflow:2.3.2.1
         restart: always
         depends_on:
-            - webserver
-        volumes:
-            - ./dags:/usr/local/airflow/dags
-            # Uncomment to include custom plugins
-            # - ./plugins:/usr/local/airflow/plugins
+            - postgres
         environment:
             - LOAD_EX=n
-            - FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
-            - EXECUTOR=Celery
-            # - POSTGRES_USER=airflow
-            # - POSTGRES_PASSWORD=airflow
-            # - POSTGRES_DB=airflow
-            # - REDIS_PASSWORD=redispass
-        command: scheduler
-
-    worker:
-        image: puckel/docker-airflow:1.10.9
-        restart: always
-        depends_on:
-            - scheduler
+            - EXECUTOR=Local
+            - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
         volumes:
             - ./dags:/usr/local/airflow/dags
-            # Uncomment to include custom plugins
-            # - ./plugins:/usr/local/airflow/plugins
-        environment:
-            - FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
-            - EXECUTOR=Celery
-            # - POSTGRES_USER=airflow
-            # - POSTGRES_PASSWORD=airflow
-            # - POSTGRES_DB=airflow
-            # - REDIS_PASSWORD=redispass
-        command: worker
-
+            - /tmp/airflow_logs:/root/airflow/logs
+        command: scheduler
+networks:
+  turreta_network:
+    driver: bridge

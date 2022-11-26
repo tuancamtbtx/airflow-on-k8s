@@ -1,7 +1,7 @@
 # replace "/" by "-", vì docker tag không cho phép dấu "/"
 ORIGINAL_BRAND_NAME=$(git symbolic-ref --short HEAD)
 BRAND_NAME=${ORIGINAL_BRAND_NAME//[\/]/-}
-VERSION=1.0.5
+VERSION=2.3.2.1
 DOCKER_IMAGE=docker-airflow
 DOCKER_REGISTRY=vantuan12345
 #-----------------------------------------------------------------------

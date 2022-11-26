@@ -23,7 +23,13 @@ Ngày 2022/24/11 trên server A xuất hiện sftp_A://a/b/c/file_3.txt thì chu
 ![Flow design](./images/flow.png)
 
 ## Setup 
-
+| Variable            | Default value |  Role                |
+|---------------------|---------------|----------------------|
+| `ARIFLOW USER`      | `airflow`     | admin 				 |
+| `ARIFLOW_PASS`      | `airflow`     | admin				 |
 ## How To Run
 
 
+## Contact:
+- Email: nguyenvantuan140397@gmail.com
+- Tele: Tuanamtbtx

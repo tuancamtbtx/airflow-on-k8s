@@ -1,0 +1,1 @@
+apache-airflow[mysql,slack,async,statsd,postgres,http,presto,sftp,trino,redis]==2.3.2
