@@ -21,7 +21,7 @@ with DAG("cake_transfer_file_sftp",
         task_id=f"sftp_file_watcher",
         ssh_conn_id="sftp_a_conn",
         local_directory=f'opt/airflow/tmp/local',
-        remote_directory=f'upload',  # ds_nodash is added in the operator by accessing Airflow context
+        remote_directory=f'upload', 
         create_intermediate_dirs=True,
         do_xcom_push=True,
     )
@@ -29,7 +29,7 @@ with DAG("cake_transfer_file_sftp",
         task_id=f"sftp_file_transfer",
         ssh_conn_id="sftp_b_conn",
         local_directory=f'opt/airflow/tmp/local',
-        remote_directory=f'upload',  # ds_nodash is added in the operator by accessing Airflow context
+        remote_directory=f'upload',  
         create_intermediate_dirs=True,
     )
     sftp_watcher >> sftp_transfer
