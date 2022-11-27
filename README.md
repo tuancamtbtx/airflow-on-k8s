@@ -20,7 +20,7 @@ Ngày 2022/24/11 trên server A xuất hiện sftp_A://a/b/c/file_3.txt thì chu
 
 ## Flow Design
 
-![Flow design](./images/flow.png)
+![Flow design](./images/dags_flow.png)
 
 ## Setup 
 
@@ -94,7 +94,7 @@ python3 -m pip install -r requirements.txt --constraint ./constraints.txt --use-
 **Setup Local Airflow**
 
 *setup database*
-- `export AIRFLOW__CORE__SQL_ALCHEMY_CONN=mysql://airflow:airflow@127.0.0.1:5432/airflow`
+- `export AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@127.0.0.1:5432/airflow`
 ```bash
 airflow db init
 ```
