@@ -1,2 +1,1 @@
-redis==4.3.3
-pysftp==0.2.9
+coloredlogs==15.0.1

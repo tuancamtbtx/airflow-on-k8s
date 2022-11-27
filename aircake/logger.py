@@ -27,7 +27,7 @@ config_initial = {
     },
 }
 
-# logging.config.dictConfig(config_initial)
+logging.config.dictConfig(config_initial)
 logging.getLogger("peewee").setLevel(logging.WARN)
 logging.getLogger("urllib3").setLevel(logging.WARN)
 logging.getLogger("gspread_dataframe").setLevel(logging.WARN)
