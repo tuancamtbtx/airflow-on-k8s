@@ -31,7 +31,7 @@ Ngày 2022/24/11 trên server A xuất hiện sftp_A://a/b/c/file_3.txt thì chu
 
 **Setup Env Var:**
 ```
-	AIRFLOW_UID=50000
+	export AIRFLOW_UID=50000
 ```
 **Build docker with docker-compose**
 ```
