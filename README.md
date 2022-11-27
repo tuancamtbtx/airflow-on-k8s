@@ -63,15 +63,19 @@ create file_1.txt and file_2.txt in folder ./tmp/sftp_a
 |---------------------|---------------|----------------------|
 | `ARIFLOW USER`      | `airflow`     | admin 				 |
 | `ARIFLOW_PASS`      | `airflow`     | admin				 |
+
 **Run Dag**
 
 **Result**
+
 ![sftp a](./images/sftp_a_folder.png)
 ![sftp b](./images/sftp_b_folder.png)
 
 ## Build Docker
   **Edit image name**
+
   **Edit image version**
+
   **Edit docker username**
 
 ```
