@@ -93,7 +93,7 @@ python3 -m pip install -r requirements_airflow.txt --constraint ./constraints.tx
 # spark
 python3 -m pip install -r ./requirements_nodeps.txt --constrain ./constraints.txt --no-deps --use-deprecated=legacy-resolver
 
-# extra libs used in airlock
+# extra libs used in aircake
 python3 -m pip install -r requirements.txt --constraint ./constraints.txt --use-deprecated=legacy-resolver
 ```
 **Setup Local Airflow**
