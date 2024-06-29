@@ -6,8 +6,8 @@ from airflow.exceptions import AirflowException
 from airflow.models import BaseOperator
 
 from airflow.contrib.hooks.ssh_hook import SSHHook
-from aircake.logger import loggerFactory
-from aircake.utils import file_utils
+from airlake.logger import loggerFactory
+from airlake.utils import file_utils
 
 logger = loggerFactory(__name__)
 

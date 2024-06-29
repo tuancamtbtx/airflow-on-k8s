@@ -5,9 +5,9 @@ from airflow.providers.sftp.operators.sftp import SFTPOperator
 from airflow.providers.sftp.sensors.sftp import SFTPSensor
 from airflow.utils.dates import days_ago
 
-from aircake.operators.sftp_download_operator import SFTPGetMultipleFilesOperator
-from aircake.operators.sftp_transfer_operator import SFTPPutMultipleFilesOperator
-from aircake.logger import loggerFactory
+from airlake.operators.sftp_download_operator import SFTPGetMultipleFilesOperator
+from airlake.operators.sftp_transfer_operator import SFTPPutMultipleFilesOperator
+from airlake.logger import loggerFactory
 
 logger = loggerFactory(__name__)
 

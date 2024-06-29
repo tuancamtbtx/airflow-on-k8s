@@ -8,11 +8,11 @@ RUN apt-get update \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /cake/aircake
-COPY --chown=airflow:airflow . /cake
+RUN mkdir -p /lakehouse/airlake
+COPY --chown=airflow:airflow . /lakehouse
 COPY requirements.txt /
 
-ENV PYTHONPATH=$PYTHONPATH:/cake
+ENV PYTHONPATH=$PYTHONPATH:/lakehouse
 
 USER airflow
 RUN pip install --no-cache-dir -r /requirements.txt

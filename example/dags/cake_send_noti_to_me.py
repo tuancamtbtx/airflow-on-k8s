@@ -5,7 +5,7 @@ from airflow.models import DAG
 from airflow.operators.python import PythonOperator
 from airflow.utils.dates import days_ago
 
-from aircake.logger import loggerFactory
+from airlake.logger import loggerFactory
 
 logger = loggerFactory(__name__)
 

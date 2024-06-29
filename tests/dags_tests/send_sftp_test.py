@@ -3,7 +3,7 @@ from datetime import datetime
 from airflow import DAG
 from airflow.models import TaskInstance
 
-from aircake.operators.sftp_download_operator import SFTPGetMultipleFilesOperator
+from airlake.operators.sftp_download_operator import SFTPGetMultipleFilesOperator
 
 DEFAULT_DATE = datetime(2022, 11, 27)
 
