@@ -13,10 +13,9 @@
 
 ## Flow Design
 
-![Flow design](./images/dags_flow.png)
+![Flow design](./assets/airflow-flow.png)
 
 ## Setup 
-
 ```
 	Install Docker vs Docker Compose
 ```
