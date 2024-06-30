@@ -1,22 +1,14 @@
 # Airflow Data Engineer
-## Operator Example
-Test: “ Có 2 hệ thống SFTP gọi là A và B.
 
- 
+[![Docker Pulls](https://badgen.net/docker/pulls/vantuan12345/airlake?icon=docker&label=pulls)](https://hub.docker.com/r/vantuan12345/airlake/)
+[![Docker Stars](https://badgen.net/docker/stars/vantuan12345/spark-generator?icon=docker&label=stars)](https://hub.docker.com/r/vantuan12345/airlake/)
+[![Docker Image Size](https://badgen.net/docker/size/vantuan12345/airlake?icon=docker&label=image%20size)](https://hub.docker.com/r/vantuan12345/airlake/)
+![Github stars](https://badgen.net/github/stars/tuancamtbtx/airflow-example?icon=github&label=stars)
+![Github forks](https://badgen.net/github/forks/tuancamtbtx/airflow-example?icon=github&label=forks)
+![Github issues](https://img.shields.io/github/issues/tuancamtbtx/airflow-example)
+![Github last-commit](https://img.shields.io/github/last-commit/tuancamtbtx/airflow-example)
 
-Thiết kế 1 pipeline chuyển dữ liệu các file mới đc sinh ra từ server SFTP A sang server SFTP B mà giữ nguyên cấu trúc thư mục.
-
-Dữ liệu chỉ đi từ A -> B, dữ liệu xóa ở A thì ko đc xóa ở B.
-
-Công nghê sử dụng : Airflow chạy trên nền Docker.
-
-Ví dụ :
-
-Ngày 2022/22/11 trên server A xuất hiện sftp_A://a/b/c/file_1.txt thì chuyển sang server B sftp_B://a/b/c/file_1.txt
-
-Ngày 2022/23/11 trên server A xuất hiện sftp_A://a/b/c/file_2.txt thì chuyển sang server B sftp_B://a/b/c/file_2.txt
-
-Ngày 2022/24/11 trên server A xuất hiện sftp_A://a/b/c/file_3.txt thì chuyển sang server B sftp_B://a/b/c/file_3.txt “
+## Operator Supported:
 
 
 ## Flow Design
@@ -42,35 +34,13 @@ Ngày 2022/24/11 trên server A xuất hiện sftp_A://a/b/c/file_3.txt thì chu
 ```
 	docker-compose up
 ```
-**Config Airlfow connection for SFTP Server A vs B**
-
-| SFTP Server | connection id |  Host   | Port | User name  | Password  | Connection Type|
-|-------------|---------------|---------|------|------------|-----------|----------------|
-| `a`         | `sftp_a_conn` | `sftp_a`| 22   | `foo`      | `pass`    |     SFTP		 | 
-| `b`         | `sftp_b_conn` | `sftp_b`| 22   | `foo`		| `pass`    |	  SFTP       |
-
-**Fake data At SFTP Server:**
-
-```
-create file_1.txt and file_2.txt in folder ./tmp/sftp_a
-
-```
-![connection sftp](./images/airflow_connections.png)
-
 **View Home Page**
-![dags](./images/dags.png)
 
 | Variable            | Default value |  Role                |
 |---------------------|---------------|----------------------|
 | `ARIFLOW USER`      | `airflow`     | admin 				 |
 | `ARIFLOW_PASS`      | `airflow`     | admin				 |
 
-**Run Dag**
-
-**Result**
-
-![sftp a](./images/sftp_a_folder.png)
-![sftp b](./images/sftp_b_folder.png)
 
 ## Build Docker
   **Edit image name**
@@ -114,6 +84,7 @@ airflow scheduler
 ```bash
 airflow webserver
 ```
+
 ## Contact:
 - Email: nguyenvantuan140397@gmail.com
 - Tele: Tuancamtbtx
