@@ -1,4 +1,4 @@
-# Airflow Data Engineer
+# Airflow For Data Engineer
 
 [![Docker Pulls](https://badgen.net/docker/pulls/vantuan12345/airlake?icon=docker&label=pulls)](https://hub.docker.com/r/vantuan12345/airlake/)
 [![Docker Stars](https://badgen.net/docker/stars/vantuan12345/spark-generator?icon=docker&label=stars)](https://hub.docker.com/r/vantuan12345/airlake/)
@@ -9,7 +9,15 @@
 ![Github last-commit](https://img.shields.io/github/last-commit/tuancamtbtx/airflow-example)
 
 ## Operator Supported:
+| Operator        		     |
+|----------------------------|
+|	BigqueryToSheetOperator  |
+|	BigQueryToGCSOperator	 | 
+|SFTPGetMultipleFilesOperator|
 
+## Airflow on k8s
+
+![Airflow k8s design](./assets/arch-diag-kubernetes.png)
 
 ## Flow Design
 
@@ -63,7 +71,7 @@ python3 -m pip install -r requirements_airflow.txt --constraint ./constraints.tx
 # spark
 python3 -m pip install -r ./requirements_nodeps.txt --constrain ./constraints.txt --no-deps --use-deprecated=legacy-resolver
 
-# extra libs used in aircake
+# extra libs used in airlake
 python3 -m pip install -r requirements.txt --constraint ./constraints.txt --use-deprecated=legacy-resolver
 ```
 **Setup Local Airflow**
