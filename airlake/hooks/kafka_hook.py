@@ -2,7 +2,6 @@
 from __future__ import print_function
 import logging
 
-import time
 from typing import Any
 from confluent_kafka import Producer
 from airflow.hooks.base import BaseHook

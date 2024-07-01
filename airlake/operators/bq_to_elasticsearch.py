@@ -1,5 +1,5 @@
 from airflow.models import BaseOperator
-from airflow.hooks.base_hook import BaseHook
+from airflow.hooks.base import BaseHook
 from airflow.utils.decorators import apply_defaults
 from airflow.providers.google.cloud.hooks.gcs import GCSHook as GoogleCloudStorageHook
 from airflow.providers.google.cloud.hooks.bigquery import BigQueryHook

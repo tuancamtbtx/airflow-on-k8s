@@ -1,7 +1,5 @@
-import json
 import pandas
 
-from airflow.exceptions import AirflowException
 from airflow.providers.redis.hooks.redis import RedisHook as BaseRedisHook
 
 
