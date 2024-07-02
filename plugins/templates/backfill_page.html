@@ -1,0 +1,274 @@
+{% extends base_template %}
+
+{% block page_title %}Airlock - Backfill{% endblock %}
+
+{% block tail %}
+<script>
+	$(document).ready(function () {
+		const source = null;
+
+		const backfill_success_message = '<div class="alert alert-success alert-dismissible">' +
+			'<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
+			'<strong>&#128077;</strong> Backfill has been completed successfully' +
+			'</div>';
+
+		const cleared_success_message = '<div class="alert alert-success alert-dismissible">' +
+			'<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
+			'<strong>&#128077;</strong> Dag runs have been cleared successfully' +
+			'</div>';
+
+		const backfill_error_message = '<div class="alert alert-danger alert-dismissible fade show">' +
+			'<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
+			'<strong>&#128078;</strong> Something went wrong !' +
+			'</div>';
+
+		const background_success_message = '<div class="alert alert-success alert-dismissible">' +
+			'<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
+			'<strong>&#128077;</strong> Background job submitted' +
+			'</div>';
+
+		const stream_stopped_message = '<div class="alert alert-info alert-dismissible">' +
+			'<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
+			'<strong>&#128517;</strong> Streaming has been stopped' +
+			'</div>';
+
+		const spinner_backfill_message = '<div class="alert alert-info" role="alert">Executing <span id="stop_process" style="margin-left:10px; color:blue; text-decoration: underline; cursor: pointer;">Stop Streaming</span></div>';
+		const spinner_background_message = '<div class="alert alert-info" role="alert">Submitting background task</div>';
+
+		const backfill_done = function () {
+			$("#backfill_status").html(backfill_success_message)
+		};
+
+		const backfill_err = function () {
+			$("#backfill_status").html(backfill_error_message)
+		};
+
+		const backfill_progress = function () {
+			$("#backfill_status").html(spinner_backfill_message)
+		};
+
+		const clear_done = function () {
+			$("#backfill_status").html(cleared_success_message)
+		};
+
+		const background_progress = function () {
+			$("#backfill_status").html(spinner_background_message)
+		};
+
+		const background_done = function () {
+			$("#backfill_status").html(background_success_message)
+		};
+
+		const disable_form = function () {
+			$("#form :input").prop("disabled", true);
+		};
+
+		const enable_form = function () {
+			$("#form :input").prop("disabled", false);
+		};
+
+		const stream_stopped = function () {
+			$("#backfill_status").html(stream_stopped_message)
+		};
+
+		$(document).on("submit", "#form", function (event) {
+			event.preventDefault();
+
+			const dag_name = $("#dag_name").val();
+			const start_date = moment($("#start_date").val()).format('YYYY-MM-DD');
+			const end_date = moment($("#end_date").val()).format('YYYY-MM-DD');
+
+			const clear_prev = $("#clear_prev").prop("checked");
+
+			const query_string = "?dag_name=" + dag_name +
+				"&start_date=" + start_date +
+				"&end_date=" + end_date +
+				"&clear=" + clear_prev;
+
+			const st_date = moment($("#start_date").val());
+			const en_date = moment($("#end_date").val());
+
+			if (st_date > en_date) {
+				alert('Start date should be less than end date ');
+				return false;
+			}
+
+			// disable the form
+			disable_form()
+
+      user_accepted = confirm("You have selected backfill for DAG name '" + dag_name + "'. Please click OK if DAG name is correct.");
+
+      if (user_accepted === true) {
+        url = '/admin/backfill/background' + query_string;
+
+        // show background progress message
+        background_progress();
+
+        $.get(url, function (data) {
+
+          document.getElementById("output").innerHTML = 'Your background job has been submitted successfully!';
+
+          // show background submission task message
+          background_done();
+
+          // enable the form
+          enable_form()
+
+        })
+      } else {
+        // enable the form
+        enable_form()
+      }
+		});
+
+		$("#history_load").click(function () {
+			$("#history").html('Fetching history...');
+
+			$.get('/admin/backfill/history', function (data) {
+
+				if (data != null) {
+					let data_rows = data.split('\n');
+
+					let rows = [];
+
+					for (var x = 0; x < data_rows.length - 1; x++) {
+						let row = data_rows[x].split(',');
+						let time = moment(row[1]).format('YYYY-MM-DD HH:mm:SS');
+						let r = '<div style="margin-top:10px;border-bottom:1px solid #f1f1f1; padding-bottom: 10px;">' + row[0] + '<span class="far fa-clock" style="float:right; font-size: 12px; color: #565656;">&nbsp;&nbsp;' + time + '</span>' + '</div>';
+
+						rows.push(r)
+
+					}
+
+					let rev_array = rows.reverse().join('');
+
+					$("#history").html(rev_array)
+				} else {
+					$("#history").html('Something went wrong!')
+				}
+			})
+		});
+
+		$(document).on('click', '#stop_process', function () {
+			if (source !== undefined || true) {
+				source.close();
+				stream_stopped();
+
+				// enable the form
+				enable_form()
+			}
+		});
+
+
+		/*For Smooth UX*/
+
+		// keep an eye on checkboxes
+		$('#backfill').change(function () {
+			if ($(this).prop("checked") === true) {
+				$('#clear_prev').prop('checked', false);
+			} else {
+				$('#clear_prev').prop('checked', true);
+			}
+		});
+		$('#clear_prev').change(function () {
+			if ($(this).prop("checked") === true) {
+				$('#backfill').prop('checked', false);
+			} else {
+				$('#backfill').prop('checked', true);
+			}
+		});
+
+		// tooltip
+		$('[data-toggle="tooltip"]').tooltip();
+	});
+
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+<style>
+	/*Custom size for jumbotron*/
+	.custom-jumbotron {
+		height: 100px;
+		padding: 10px;
+		margin-bottom: 20px;
+	}
+
+	.row {
+		margin-bottom: 10px;
+	}
+
+	.info-icon {
+		font-weight: bolder;
+	}
+
+	#output {
+		padding: 5px;
+		background: #f7f7f7;
+		height: 350px;
+		overflow-y: scroll;
+	}
+
+	hr {
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		border: 0;
+		border-top: 1px solid rgba(0, 0, 0, 0.1);
+	}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<h2>Backfill</h2>
+	<hr/>
+
+	<!-- showing backfill status -->
+	<div id="backfill_status"></div>
+
+	<!-- start form -->
+	<form id="form" autocomplete="off">
+		<!-- dag related controls -->
+
+		<div class="row">
+			<div class="form-group col-md-8">
+				<div class="form-group">
+					<label for="dag_name">DAG Name</label>
+					<input type="text" class="form-control" id="dag_name" name="dag_name" placeholder="place your dag name here" required="true">
+				</div>
+				<div class="form-group">
+					<div class="col-sm-10">
+						<div class="form-check row">
+							<div class="col-sm-6">
+								<input type="checkbox" name="clear_prev" class="custom-control-input mb-2 mr-sm-2" id="clear_prev"
+									value="yes">
+								<label class="form-check-label" for="clear_prev">
+									Clear previous runs (if any) <span class="info-icon" data-toggle="tooltip"
+										title="If DAG got failed in interval you specified, then it will be cleared first and then backfill will run"
+										data-placement="right">&#9432;</span>
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<label for="start_date">Start Datetime</label>
+					<input type="date" name="start_date" class="form-control mb-2 mr-sm-2" id="start_date"
+						data-target="#start_date" required="true" />
+				</div>
+				<div class="form-group">
+					<label for="end_date">End Datetime</label>
+					<input type="date" name="end_date" class="form-control mb-2 mr-sm-2" id="end_date"
+						data-target="#end_date" required="true" />
+				</div>
+				<div class="form-group text-right">
+					<input id="submit" type="submit" class="btn btn-primary mb-2 mr-sm-2" value="Start">
+					<input type="reset" class="btn btn-default" value="Clear">
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+{% endblock %}

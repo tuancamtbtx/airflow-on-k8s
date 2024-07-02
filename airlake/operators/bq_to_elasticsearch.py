@@ -1,16 +1,13 @@
 from airflow.models import BaseOperator
-from airflow.hooks.base import BaseHook
 from airflow.utils.decorators import apply_defaults
 from airflow.providers.google.cloud.hooks.gcs import GCSHook as GoogleCloudStorageHook
 from airflow.providers.google.cloud.hooks.bigquery import BigQueryHook
 
-
-from elasticsearch import Elasticsearch
-from elasticsearch import helpers
+from airflow.utils.context import Context
+from typing import Any
 import gzip
 import json
 import os
-import io
 from airlake.hooks.elasticsearch_hook import ElasticSearchHook
 
 
@@ -32,7 +29,7 @@ class BigqueryToElasticSearchOperator(BaseOperator):
         sql="",
         destination_cloud_storage_uris="",
         source_project_dataset_table="",
-        source_bucket="tiki-brain",
+        source_bucket="gcs-stg",
         es_index="",
         gcp_conn_id="bigquery_default",
         gcs_bucket="",
@@ -75,7 +72,7 @@ class BigqueryToElasticSearchOperator(BaseOperator):
         self.size_bulk = size_bulk
         # validate input from config dag
 
-    def execute(self, context):
+    def execute(self, context: Context) -> Any:
         self.log.info(
             "Sync table %s to elasticsearch", self.source_project_dataset_table
         )

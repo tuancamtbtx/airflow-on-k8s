@@ -8,11 +8,11 @@ RUN apt-get update \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /lakehouse/airlake
-COPY --chown=airflow:airflow . /lakehouse
+RUN mkdir -p /bigdata/airlake
+COPY --chown=airflow:airflow . /bigdata
 COPY requirements.txt /
 
-ENV PYTHONPATH=$PYTHONPATH:/lakehouse
+ENV PYTHONPATH=$PYTHONPATH:/bigdata
 
 USER airflow
 RUN pip install --no-cache-dir -r /requirements.txt
