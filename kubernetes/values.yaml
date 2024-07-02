@@ -1,8 +1,9 @@
 executor: "KubernetesExecutor"
-images: 
-  airflow: "vantuan12345/airlake"
-  pullPolicy: "IfNotPresent"
-  tag: "latest"
+# images: 
+#   airflow: 
+#     repository: "vantuan12345/airlake"
+#     tag: "latest"
+#     pullPolicy: "Always"
 
 
 dags:

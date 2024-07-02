@@ -23,7 +23,7 @@ To deploy Airflow on Kubernetes using Helm chart, follow these steps:
 4. Install Airflow using the Helm chart:
 
     ```shell
-    helm upgrade --install airflow apache-airflow/airflow --namespace airflow --f values.yaml 
+    helm upgrade --install airflow apache-airflow/airflow --namespace airflow -f values.yaml 
     ```
 
     This command will install Airflow with the default configuration. You can customize the installation by providing a values file or using Helm chart options.
