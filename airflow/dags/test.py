@@ -1,36 +1,56 @@
-from airflow import DAG
-from airflow.operators.python import PythonOperator
-from airflow.utils.dates import days_ago
+from __future__ import annotations
 
-# Define default arguments
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-}
+import datetime
+import warnings
 
-# Define the function to be executed by the PythonOperator
-def print_hello_world():
-    print("Hello, World!")
+import pytest
 
-# Define the DAG
-dag = DAG(
-    'print_hello_world',
-    default_args=default_args,
-    description='A simple DAG to print Hello, World!',
-    schedule_interval=None,
-    start_date=days_ago(1),
-    tags=['example'],
-)
+from airflow.models.dag import DAG
+from airflow.operators.bash import BashOperator
+from airflow.operators.subdag import SubDagOperator
 
-# Define the PythonOperator
-hello_world_task = PythonOperator(
-    task_id='print_hello_world',
-    python_callable=print_hello_world,
+pytestmark = pytest.mark.db_test
+
+
+def create_subdag_opt(main_dag):
+    subdag_name = "daily_job"
+    subdag = DAG(
+        dag_id=f"{dag_name}.{subdag_name}",
+        start_date=start_date,
+        schedule=None,
+        max_active_tasks=2,
+    )
+    BashOperator(bash_command="echo 1", task_id="daily_job_subdag_task", dag=subdag)
+    with warnings.catch_warnings():
+        warnings.filterwarnings(
+            "ignore",
+            message=r"This class is deprecated\. Please use `airflow\.utils\.task_group\.TaskGroup`\.",
+        )
+        return SubDagOperator(
+            task_id=subdag_name,
+            subdag=subdag,
+            dag=main_dag,
+        )
+
+
+dag_name = "clear_subdag_test_dag"
+
+start_date = datetime.datetime(2016, 1, 1)
+
+dag = DAG(dag_id=dag_name, max_active_tasks=3, start_date=start_date, schedule="0 0 * * *")
+
+daily_job_irrelevant = BashOperator(
+    bash_command="echo 1",
+    task_id="daily_job_irrelevant",
     dag=dag,
 )
 
-# Set the task dependencies
-hello_world_task
+daily_job_downstream = BashOperator(
+    bash_command="echo 1",
+    task_id="daily_job_downstream",
+    dag=dag,
+)
+
+daily_job = create_subdag_opt(main_dag=dag)
+
+daily_job >> daily_job_downstream
