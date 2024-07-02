@@ -13,3 +13,9 @@ dags:
     branch: master
     subPath: "airflow/dags"
     sshKeySecret: airflow-ssh-secret
+    containerName: git-sync
+    knownHosts: github.com
+
+webserver:
+  service:
+    type: LoadBalancer
