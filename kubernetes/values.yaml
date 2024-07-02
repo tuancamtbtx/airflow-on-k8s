@@ -1,13 +1,14 @@
 executor: "KubernetesExecutor"
 images: 
-  airflow: "apache/airflow:2.0.1-python3.8"
+  airflow: "vantuan12345/airlake"
   pullPolicy: "IfNotPresent"
-  
+  tag: "latest"
+
 
 dags:
   gitSync:
-      enabled: true
-      repo: git@github.com:tuancamtbtx/airflow-example.git
-      branch: master
-      subPath: "airflow/dags"
-      sshKeySecret: airflow-ssh-secret
+    enabled: true
+    repo: git@github.com:tuancamtbtx/airflow-example.git
+    branch: master
+    subPath: "airflow/dags"
+    sshKeySecret: airflow-ssh-secret
