@@ -2,17 +2,17 @@ executor: "KubernetesExecutor"
 image:
     repository: vantuan12345/airlake
     tag: latest
-
     ## WARNING: even if set to "Always" DO NOT reuse tag names, 
     ##          containers only pull the latest image when restarting
     pullPolicy: IfNotPresent
-dags:
-  gitSync:
-    enabled: true
-    repo: git@github.com:tuancamtbtx/airflow-example.git
-    branch: master
-    subPath: "airflow/dags"
-    sshKeySecret: airflow-ssh-secret
-    containerName: git-sync
-    knownHosts: github.com
+# dags:
+#   gitSync:
+#     enabled: true
+#     repo: git@github.com:tuancamtbtx/airflow-example.git
+#     branch: master
+#     subPath: "airflow/dags"
+#     sshKeySecret: airflow-ssh-secret
+#     containerName: git-sync
+#     knownHosts: github.com
+
 

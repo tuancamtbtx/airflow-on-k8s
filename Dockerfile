@@ -1,4 +1,4 @@
-FROM apache/airflow:2.9.2
+FROM apache/airflow:2.9.1
 USER root
 
 RUN apt-get update \
