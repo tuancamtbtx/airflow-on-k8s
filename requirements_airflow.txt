@@ -1,1 +1,1 @@
-apache-airflow[slack,async,statsd,postgres,http,presto,sftp,trino,redis]==2.4.3
+apache-airflow[slack,async,statsd,postgres,http,presto,sftp,trino,redis]==2.9.2
