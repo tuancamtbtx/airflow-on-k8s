@@ -1,4 +1,4 @@
-FROM apache/airflow:2.9.1
+FROM apache/airflow:2.8.4-python3.9
 USER root
 
 RUN apt-get update \

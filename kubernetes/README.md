@@ -1,5 +1,6 @@
 # Deploy Airflow with Helm chart
 
+Load Airflow DAGs
 
 To deploy Airflow on Kubernetes using Helm chart, follow these steps:
 ## Deploy

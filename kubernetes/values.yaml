@@ -1,18 +1,43 @@
 executor: "KubernetesExecutor"
 image:
-    repository: vantuan12345/airlake
+    repository: vantuan12345/airlake:latest
     tag: latest
     ## WARNING: even if set to "Always" DO NOT reuse tag names, 
     ##          containers only pull the latest image when restarting
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
+
 # dags:
+#   ## NOTE: this is the default value
+#   path: /opt/airflow/dags
+  
 #   gitSync:
 #     enabled: true
-#     repo: git@github.com:tuancamtbtx/airflow-example.git
-#     branch: master
-#     subPath: "airflow/dags"
-#     sshKeySecret: airflow-ssh-secret
-#     containerName: git-sync
-#     knownHosts: github.com
-
+    
+#     ## NOTE: some git providers will need an `ssh://` prefix
+#     repo: "git@github.com:tuancamtbtx/airflow-on-k8s.git"
+#     branch: "master"
+#     revision: "HEAD"
+    
+#     ## the sub-path within your repo where dags are located
+#     ## NOTE: airflow will only see dags under this path, but the whole repo will still be synced
+#     #repoSubPath: "path/to/dags"
+    
+#     ## number of seconds to wait between syncs
+#     ## NOTE: also sets `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` unless overwritten in `airflow.config`
+#     syncWait: 60
+    
+#     ## the max number of seconds allowed for a complete sync
+#     ## NOTE: if your repo takes a very long time to sync, you may need to increase this value
+#     #syncTimeout: 120
+    
+#     ## the number of consecutive failures allowed before aborting
+#     ## NOTE: if your repo regularly has intermittent failures, you may wish to set a non-0 value
+#     #maxFailures: 0
+    
+#     sshSecret: "airflow-ssh-git-secret"
+#     sshSecretKey: "id_rsa"
+    
+#     ## NOTE: "known_hosts" verification can be disabled by setting to "" 
+#     sshKnownHosts: |-
+#       github.com
 
