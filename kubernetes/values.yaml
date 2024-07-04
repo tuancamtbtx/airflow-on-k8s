@@ -1,11 +1,11 @@
 executor: "KubernetesExecutor"
-# images: 
-#   airflow: 
-#     repository: "vantuan12345/airlake"
-#     tag: "latest"
-#     pullPolicy: "Always"
+image:
+    repository: vantuan12345/airlake
+    tag: latest
 
-
+    ## WARNING: even if set to "Always" DO NOT reuse tag names, 
+    ##          containers only pull the latest image when restarting
+    pullPolicy: IfNotPresent
 dags:
   gitSync:
     enabled: true
@@ -16,6 +16,3 @@ dags:
     containerName: git-sync
     knownHosts: github.com
 
-webserver:
-  service:
-    type: LoadBalancer
