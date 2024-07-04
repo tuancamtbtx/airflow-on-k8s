@@ -35,5 +35,5 @@ gitSync:
     
     ## NOTE: "known_hosts" verification can be disabled by setting to "" 
   sshKnownHosts: |-
-      github.com <id_rsa>
+      github.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC/gpDq7Kj8vP9h5GBQrdbHmqfAvUsl84JWDMHNPxccqXoaHWKwWz4Ve14L8YL8sAQb2BrkOnP40uvzR1Ieo9ERh2eQAI72QEbLPdaEsHo3nGtvZBZShpC1wyvJ05YDUKV+Dc7UUVIgN+tNl6owoSwf9mklsxYzX7LbPk0Rqo6jmNcH0uUcFJZfdsKSF4tkpKKo6P8+/tjT+lVrpgJWYJYT67Ykod2iPBvHdANIpgKRC2ycmTdgOBcnPddLZXWJJ+skUFvJJpqByXRipMjgtQcN7S74Dw6x0ht7jxq2lcRDQXk0A9vt9lSYEoQid/BCSqgJff/XYhhdWWZoXIZMd86gyIRWj4/FQspgFcGiZxY5SmfXQirRJAqEmqZzQDmVuAU7gIAWv9+lUsneNTeJo+dt+wezPStW03qcrCgYKuPI4Egnp5LST6qoOOC0qn/M41/Hp7YYqGhjW+KYncBTI0ip6BJgL/usLFd/kwLrhOogjE+Xob+nsKQQxyguzymROBWWRMrPNVqWs0H/phx33WU7zLhtfaoGAi/TzTNhOKaAR0GOgQX660at4ViO5VuIAzsP88s55T37J2Gct0wV8TxxorexXhdwQba7bQZ1E4Do25E65t+P1D9CJ1peLwg2Srx0MbCNAtMtVjVply+wCMqzpHljK3mGRT/NKnQtgMZ7Tw== tuan.nguyen3@trustingsocial.com
 
