@@ -122,3 +122,4 @@ pip-selfcheck.json
 airflow-ssh-secret.yaml
 
 values.yaml
+private/

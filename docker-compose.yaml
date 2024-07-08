@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  git-sync:
+    image: registry.k8s.io/git-sync/git-sync:v3.6.6
+    environment:
+      - GIT_SYNC_REPO=git@github.com:tuancamtbtx/airflow-on-k8s.git
+      - GIT_SYNC_BRANCH=master
+      - GIT_SYNC_DEST=/git
+      - GIT_SYNC_WAIT=300  # Time in seconds between syncs
+      # - GIT_SYNC_ONE_TIME=false
+      - GIT_SYNC_SSH=1
+      - GIT_SSH_KEY_FILE=/tmp/.ssh/id_rsa.pub
+      - GIT_SSH_KNOWN_HOSTS_FILE=/tmp/.ssh/known_hosts
+    volumes:
+      - ./airflow_dags/dags:/git
+      - ./private/id_rsa:/tmp/.ssh/id_rsa.pub
+      - ./private/known_hosts:/tmp/.ssh/known_hosts
