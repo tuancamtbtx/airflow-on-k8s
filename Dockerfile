@@ -13,7 +13,6 @@ COPY --chown=airflow:airflow . /bigdata
 COPY requirements.txt /
 
 ENV PYTHONPATH=$PYTHONPATH:/bigdata
-COPY ./airflow_dags/dags /opt/airflow/dags
 
 USER airflow
 RUN pip install --no-cache-dir -r /requirements.txt
