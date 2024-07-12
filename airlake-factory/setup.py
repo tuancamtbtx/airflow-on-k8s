@@ -7,8 +7,17 @@ import logging
 
 import os
 
-name = "pylake"
+name = "airfactory"
 SOURCES_ROOT = Path(__file__).parent.resolve()
+
+# Package meta-data.
+NAME = "airlake-factory"
+PKG_NAME = "airfactory"
+DESCRIPTION = "Dynamically build Airflow DAGs from YAML files"
+URL = "https://github.com/tuancamtbtx/airflow-on-k8s"
+EMAIL = "nguyenvantuan140397@gmail.me"
+AUTHOR = "Tuan Nguyen"
+REQUIRES_PYTHON = ">=3.7.0"
 
 
 class CleanCommand(Command):
@@ -74,10 +83,10 @@ def do_setup():
         packages=packages,
         include_package_data=True,
         license="MIT",
-        author="trustingsocial",
+        author=AUTHOR,
         description="Python library for TrustingSocial To use in GCP projects",
         cmdclass={
-            'clean': CleanCommand
+            'gen': CleanCommand
         }
     )
 
