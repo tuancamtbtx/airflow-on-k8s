@@ -1,0 +1,2 @@
+recursive-include pytrust
+recursive-include . version.txt
