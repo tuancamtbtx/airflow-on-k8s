@@ -5,6 +5,7 @@ import os
 
 from airflow.configuration import conf
 
+from airlake.factory.io import FactoryDagIO
 
 logging.getLogger("airflow").setLevel(logging.WARN)
 logging.getLogger("airflow").setLevel(logging.WARN)
@@ -13,6 +14,7 @@ logging.getLogger("schedule").setLevel(logging.WARN)
 
 
 def main():
+    print("Welcome to Airlake - Airflow Dynamic DAGs Importer!")
     parser = argparse.ArgumentParser()
     parser.add_argument("--path", required=True, help="Path to local git dir")
     parser.add_argument("--git_layout", default="git/dags_conf")
@@ -25,5 +27,7 @@ def main():
         "--num_process", default=8, type=int, help="NumProcess that parse file!"
     )
     args = parser.parse_args()
+
+
 if __name__ == "__main__":
     main()

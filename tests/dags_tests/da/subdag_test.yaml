@@ -1,0 +1,31 @@
+apiVersion: v1
+default_args:
+  owner: nguyenvantuan140397@gmail.com
+  start_date: 2024-06-28
+dags:
+  daily:
+    schedule_interval: "0 2 * * *"
+    tasks:
+      score_products:
+        operator: airflow.contrib.operators.bigquery_operator.BigQueryOperator
+        sql: SELECT * FROM `tiki-dwh.sherlock.vw_product_fraud_score`
+        destination_dataset_table: "tiki-dwh.sherlock.product_scoring_{{ macros.localtz.ds_nodash(ti) }}"
+
+      etl_olap:
+        operator: TaskGroup
+        dependencies: ["score_products"]
+        tasks:
+          build_fact_table:
+            operator: airflow.contrib.operators.bigquery_operator.BigQueryOperator
+            sql: $vars.build_fact_table.sql
+            destination_dataset_table: "tiki-dwh.sherlock.product_scoring_{{ macros.localtz.ds_nodash(ti) }}"
+
+          update_realtime_cached:
+            operator: airlock.operators.bq_to_cassandra.BigqueryToCassandraOperator
+            cassandra_dest_table: "sherlock.product_scores"
+            sql: |
+              SELECT CAST(sku AS STRING) sku, product_fraud_score_new score
+              FROM `tiki-dwh.sherlock.vw_product_fraud_score_update`
+              WHERE sku IS NOT NULL
+            dependencies: ["build_fact_table"]
+
