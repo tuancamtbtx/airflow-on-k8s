@@ -1,5 +1,11 @@
 import os
+from airflow.configuration import conf as airflow_conf
 from typing import Dict, Any
+
+from airfactory.logger import loggerFactory
+
+logging = loggerFactory(__name__)
+
 class DagCompiler:
     def __init__(self, path_config:str=None, **kwargs):
         self.path_config = path_config
@@ -11,6 +17,7 @@ class DagCompiler:
         return
     
     
+
 def load_yaml_dags(
     globals_dict: Dict[str, Any],
     dags_folder: str = airflow_conf.get("core", "dags_folder"),
@@ -39,5 +46,5 @@ def load_yaml_dags(
 
     for config_file_path in candidate_dag_files:
         config_file_abs_path = str(config_file_path.absolute())
-        DagFactory(config_file_abs_path).generate_dags(globals_dict)
+        # DagFactory(config_file_abs_path).generate_dags(globals_dict)
         logging.info("DAG loaded: %s", config_file_path)

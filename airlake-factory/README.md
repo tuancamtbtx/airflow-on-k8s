@@ -1,9 +1,9 @@
-# PyTrust
+# Airlake Dag Factory
 A shared python package support some GCP tasks
 ## Run Test Locally
 **Must Have**
 ```
-export PYTHONPATH=$PYTHONPATH:/pytrust
+export PYTHONPATH=$PYTHONPATH:/airfactory
 ```
 **Run Test**
 ```
@@ -14,9 +14,9 @@ make test
 make dist
 ```
 ## Usage This Lib
-**Copy pytrust-1.0.0.tar.gz in dist folder to your project**
+**Copy airfactory-1.0.0.tar.gz in dist folder to your project**
 
 **Configure requirements.txt**
 ```
-./packages/pytrust-1.0.0.tar.gz
+./packages/airfactory-1.0.0.tar.gz
 ```
