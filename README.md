@@ -116,6 +116,14 @@ airflow scheduler
 airflow webserver
 ```
 
+## Contributing
+The project has a separate contribution file. Please adhere to the steps listed in the separate contributions [file](./CONTRIBUTING.md)
+
+
+## License
+
+This project is licensed under the Apache License, Version 2.0. See the [LICENSE](LICENSE) file for more details.
+
 ## Contact:
 - Email: nguyenvantuan140397@gmail.com
 - Tele: Tuancamtbtx
@@ -123,3 +131,4 @@ airflow webserver
 ## Note:
 
 Please **DO NOT** edit code and data in this project
+
