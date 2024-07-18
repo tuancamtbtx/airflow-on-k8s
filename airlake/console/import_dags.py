@@ -5,7 +5,6 @@ import os
 
 from airflow.configuration import conf
 
-from airlake.factory.io import FactoryDagIO
 
 logging.getLogger("airflow").setLevel(logging.WARN)
 logging.getLogger("airflow").setLevel(logging.WARN)
