@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: airflow
+  namespace: argocd
+spec:
+  destination:
+    namespace: airflow
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: kubernetes/argocd/values/airflow
+    repoURL:https://github.com/tuancamtbtx/airflow-on-k8s.git
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

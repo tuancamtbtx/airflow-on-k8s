@@ -1,0 +1,8 @@
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/tuancamtbtx/airflow-on-k8s.git
+    targetRevision: master
+  syncPolicy: {}
