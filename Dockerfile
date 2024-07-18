@@ -1,4 +1,4 @@
-FROM apache/airflow:2.8.4-python3.9
+FROM apache/airflow:2.8.4-python3.9 AS base 
 USER root
 
 RUN apt-get update \
@@ -9,13 +9,11 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /bigdata/airlake
-COPY --chown=airflow:airflow . /bigdata
+COPY --chown=airflow:airflow --from=base . /bigdata
+COPY packages/* /packages
 COPY requirements.txt /
 
 ENV PYTHONPATH=$PYTHONPATH:/bigdata
 
 USER airflow
 RUN pip install --no-cache-dir -r /requirements.txt
-
-
-
