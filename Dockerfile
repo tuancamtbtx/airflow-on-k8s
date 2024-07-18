@@ -1,19 +1,19 @@
-FROM apache/airflow:2.8.4-python3.9 AS base 
+FROM apache/airflow:2.8.4-python3.9 
 USER root
 
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends \
-         vim \
-  && apt-get autoremove -yqq --purge \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+    && apt-get install -y --no-install-recommends git
 
+# COPY requirements.txt constraints.txt scripts/deps /tmp/work/
+# RUN /tmp/work/deps /tmp/work && rm -rf /tmp/work
+
+# our codes
 RUN mkdir -p /bigdata/airlake
-COPY --chown=airflow:airflow --from=base . /bigdata
-COPY packages/* /packages
+COPY --chown=airflow:airflow . /bigdata
 COPY requirements.txt /
 
-ENV PYTHONPATH=$PYTHONPATH:/bigdata
+ENV PYTHONPATH=$PYTHONPATH:/bigdata/airlake
 
 USER airflow
+COPY --chown=airflow:airflow packages/* /opt/airflow/packages/
 RUN pip install --no-cache-dir -r /requirements.txt
