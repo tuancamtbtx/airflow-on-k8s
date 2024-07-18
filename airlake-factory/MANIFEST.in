@@ -1,2 +1,2 @@
-recursive-include pytrust
+recursive-include airfactory
 recursive-include . version.txt

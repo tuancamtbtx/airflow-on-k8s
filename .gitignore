@@ -119,7 +119,5 @@ pip-selfcheck.json
 
 .pylintrc
 
-airflow-ssh-secret.yaml
 
-values.yaml
 private/
