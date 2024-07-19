@@ -32,6 +32,7 @@ tasks:
     dependencies: ["score_products"]
 
 ```
+
 ## Operator Supported:
 | Operator        		     |
 |----------------------------|
