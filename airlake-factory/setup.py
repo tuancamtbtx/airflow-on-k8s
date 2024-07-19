@@ -15,12 +15,12 @@ NAME = "airlake-factory"
 PKG_NAME = "airfactory"
 DESCRIPTION = "Dynamically build Airflow DAGs from YAML files"
 URL = "https://github.com/tuancamtbtx/airflow-on-k8s"
-EMAIL = "nguyenvantuan140397@gmail.me"
+EMAIL = "nguyenvantuan140397@gmail.com"
 AUTHOR = "Tuan Nguyen"
 REQUIRES_PYTHON = ">=3.7.0"
 
 
-class CleanCommand(Command):
+class UploadCommand(Command):
     user_options: typing.List[str] = []
 
     def initialize_options(self) -> None:
@@ -84,9 +84,9 @@ def do_setup():
         include_package_data=True,
         license="MIT",
         author=AUTHOR,
-        description="Python library for TrustingSocial To use in GCP projects",
+        description="Dynamically build Airflow DAGs from YAML files",
         cmdclass={
-            'gen': CleanCommand
+            'gen': UploadCommand
         }
     )
 
