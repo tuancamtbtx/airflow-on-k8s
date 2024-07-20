@@ -14,7 +14,7 @@ SOURCES_ROOT = Path(__file__).parent.resolve()
 NAME = "airlake-factory"
 PKG_NAME = "airfactory"
 DESCRIPTION = "Dynamically build Airflow DAGs from YAML files"
-URL = "https://github.com/tuancamtbtx/airflow-on-k8s"
+URL = "https://github.com/tuancamtbtx/airflow-on-k8s/airlake-factory"
 EMAIL = "nguyenvantuan140397@gmail.com"
 AUTHOR = "Tuan Nguyen"
 REQUIRES_PYTHON = ">=3.7.0"
