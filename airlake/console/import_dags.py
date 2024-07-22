@@ -1,7 +1,5 @@
-import time
 import logging
 import argparse
-import os
 
 from airflow.configuration import conf
 

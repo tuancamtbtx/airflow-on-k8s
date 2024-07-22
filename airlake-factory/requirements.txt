@@ -1,5 +1,0 @@
-coloredlogs==15.0.1
-confluent_kafka==2.4.0
-deepmerge==1.1.1
-loguru
-PyYAML==6.0
