@@ -1,20 +1,20 @@
 FROM --platform=linux/x86_64 apache/airflow:2.8.4-python3.9 
 
-USER root
+# USER root
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends git
+# RUN apt-get update \
+#     && apt-get install -y --no-install-recommends git
 
-# COPY requirements.txt constraints.txt scripts/deps /tmp/work/
-# RUN /tmp/work/deps /tmp/work && rm -rf /tmp/work
+# # COPY requirements.txt constraints.txt scripts/deps /tmp/work/
+# # RUN /tmp/work/deps /tmp/work && rm -rf /tmp/work
 
-# our codes
-RUN mkdir -p /bigdata/airlake
-COPY --chown=airflow:airflow . /bigdata
-COPY requirements.txt /
+# # our codes
+# RUN mkdir -p /bigdata/airlake
+# COPY --chown=airflow:airflow . /bigdata
+# COPY requirements.txt /
 
-ENV PYTHONPATH=$PYTHONPATH:/bigdata/airlake
+# ENV PYTHONPATH=$PYTHONPATH:/bigdata/airlake
 
-USER airflow
-COPY --chown=airflow:airflow packages/* /opt/airflow/packages/
-RUN pip install --no-cache-dir -r /requirements.txt
+# USER airflow
+# COPY --chown=airflow:airflow packages/* /opt/airflow/packages/
+# RUN pip install --no-cache-dir -r /requirements.txt
