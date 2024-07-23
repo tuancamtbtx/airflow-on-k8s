@@ -6,5 +6,4 @@ images:
     tag: v1.0.1 
     ## WARNING: even if set to "Always" DO NOT reuse tag names, 
     ##          containers only pull the latest image when restarting
-    pullPolicy: IfNotPresent
-    
+    pullPolicy: Always
