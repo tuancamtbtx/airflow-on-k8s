@@ -1,4 +1,4 @@
-FROM --platform=arm64 apache/airflow:2.8.4-python3.9 
+FROM --platform=linux/x86_64 apache/airflow:2.8.4-python3.9 
 
 USER root
 
