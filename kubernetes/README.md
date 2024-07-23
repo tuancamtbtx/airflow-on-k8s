@@ -180,7 +180,7 @@ Push the `values.yaml` and `airflow.yaml` to your Git repository.
 Apply the ArgoCD Application manifest:
 
 ```sh
-kubectl apply -f https://github.com/tuancamtbtx/airflow-on-k8s/kubernetes/airflow/airflow-app.yaml -n argocd
+kubectl apply -f https://github.com/tuancamtbtx/airflow-on-k8s/kubernetes/argocd/airflow/airflow-app.yaml -n argocd
 ```
 
 #### 11. Monitor Deployment
