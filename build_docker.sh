@@ -1,6 +1,6 @@
 # replace "/" by "-", vì docker tag không cho phép dấu "/"
 ORIGINAL_BRAND_NAME=$(git symbolic-ref --short HEAD)
-VERSION=v1.0.0
+VERSION=v1.0.2
 DOCKER_IMAGE=airlake
 DOCKER_REGISTRY=vantuan12345
 #-----------------------------------------------------------------------

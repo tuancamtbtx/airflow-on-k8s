@@ -3,7 +3,8 @@ executor: "KubernetesExecutor"
 images:
   airflow:
     repository: vantuan12345/airlake
-    tag: v1.0.1 
+    tag: v1.0.2 
     ## WARNING: even if set to "Always" DO NOT reuse tag names, 
     ##          containers only pull the latest image when restarting
     pullPolicy: Always
+
