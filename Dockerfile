@@ -13,8 +13,6 @@ RUN apt-get update \
 # set default timezone
 RUN rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
 
-RUN adduser airflow
-
 # COPY requirements.txt constraints.txt scripts/deps /tmp/work/
 # RUN /tmp/work/deps /tmp/work && rm -rf /tmp/work
 
