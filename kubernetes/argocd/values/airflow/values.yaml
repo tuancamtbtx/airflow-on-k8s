@@ -2,26 +2,32 @@ airflow:
   executor: "KubernetesExecutor"
   image:
     airflow:
-      repository: docker.io/vantuan12345/airlake
+      repository: vantuan12345/airfactory
       tag: latest
       ## WARNING: even if set to "Always" DO NOT reuse tag names, 
       ##          containers only pull the latest image when restarting
-      pullPolicy: IfNotPresent
-
-  gitSync:
-    enabled: true
-      
-      ## NOTE: some git providers will need an `ssh://` prefix
-    repo: "git@github.com:tuancamtbtx/airflow-on-k8s.git"
-    branch: "master"
-      
-      ## the sub-path within your repo where dags are located
-      ## NOTE: airflow will only see dags under this path, but the whole repo will still be synced
-    subPath: "airflow_dags/dags"
-      
-      ## number of seconds to wait between syncs
-      ## NOTE: also sets `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` unless overwritten in `airflow.config`
-    syncWait: 60
-    sshKeySecret: airflow-ssh-secret
+      pullPolicy: Always
+  createUserJob:
+    useHelmHooks: false
+    applyCustomEnv: false
+  migrateDatabaseJob:
+    useHelmHooks: false
+    applyCustomEnv: false
+  dags:
+    gitSync:
+      enabled: true
+        
+        ## NOTE: some git providers will need an `ssh://` prefix
+      repo: "git@github.com:tuancamtbtx/airflow-on-k8s.git"
+      branch: "master"
+        
+        ## the sub-path within your repo where dags are located
+        ## NOTE: airflow will only see dags under this path, but the whole repo will still be synced
+      subPath: "airflow_dags/dags"
+        
+        ## number of seconds to wait between syncs
+        ## NOTE: also sets `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` unless overwritten in `airflow.config`
+      syncWait: 60
+      sshKeySecret: airflow-ssh-secret
 
       
