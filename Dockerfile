@@ -1,20 +1,6 @@
-FROM apache/airflow:2.9.2-python3.9 
+FROM vantuan12345/airfactory:airfactory:1.0.0_airflow2.9.2
 
-USER root
-
-RUN apt-get update \
-    && apt-get autoremove -yqq --purge \
-    && apt-get install -y --no-install-recommends git \
-    && apt-get install -y --no-install-recommends htop git default-libmysqlclient-dev libsnappy-dev liblzma-dev patch curl default-mysql-client\
-    && curl -fsSLo /usr/bin/kubectl "https://dl.k8s.io/release/v1.20.4/bin/linux/amd64/kubectl"\
-    && chmod +x /usr/bin/kubectl\
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-# set default timezone
-RUN rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
-
-# COPY requirements.txt constraints.txt scripts/deps /tmp/work/
-# RUN /tmp/work/deps /tmp/work && rm -rf /tmp/work
+USER airflow
 
 # our codes
 RUN mkdir -p /bigdata/airlake

@@ -26,4 +26,4 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/airlake:v1.0.1
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/1.0.0_airflow2.9.2
