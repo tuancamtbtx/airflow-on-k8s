@@ -1,7 +1,7 @@
 # Airflow For Data Engineer
 
 [![Docker Pulls](https://badgen.net/docker/pulls/vantuan12345/airlake?icon=docker&label=pulls)](https://hub.docker.com/r/vantuan12345/airlake/)
-[![Docker Stars](https://badgen.net/docker/stars/vantuan12345/spark-generator?icon=docker&label=stars)](https://hub.docker.com/r/vantuan12345/airlake/)
+[![Docker Stars](https://badgen.net/docker/stars/vantuan12345/airlake?icon=docker&label=stars)](https://hub.docker.com/r/vantuan12345/airlake/)
 [![Docker Image Size](https://badgen.net/docker/size/vantuan12345/airlake?icon=docker&label=image%20size)](https://hub.docker.com/r/vantuan12345/airlake/)
 ![Github stars](https://badgen.net/github/stars/tuancamtbtx/airflow-example?icon=github&label=stars)
 ![Github forks](https://badgen.net/github/forks/tuancamtbtx/airflow-example?icon=github&label=forks)
