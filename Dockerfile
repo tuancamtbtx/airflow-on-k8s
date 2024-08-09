@@ -1,4 +1,4 @@
-FROM vantuan12345/airfactory:airfactory:1.0.0_airflow2.9.2
+FROM vantuan12345/airfactory:1.0.0_airflow2.9.2
 
 USER airflow
 
