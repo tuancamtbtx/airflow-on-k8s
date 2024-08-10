@@ -1,6 +1,6 @@
-FROM vantuan12345/airfactory:1.0.0_airflow2.9.2
+FROM apache/airflow:2.9.2-python3.9
 
-USER airflow
+USER root
 
 # our codes
 RUN mkdir -p /bigdata/airlake
@@ -13,4 +13,3 @@ USER airflow
 COPY --chown=airflow:airflow packages/* /opt/airflow/packages/
 RUN pip install --no-cache-dir -r /requirements.txt
 
-ENTRYPOINT ["/tini", "--"]
